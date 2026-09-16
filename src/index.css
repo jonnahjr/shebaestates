@@ -1,0 +1,323 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    color-scheme: light;
+  }
+  
+  body {
+    background-color: #FAF7F2;
+    color: #131714;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: #16281D;
+    color: #FAF7F2;
+  }
+}
+
+@layer utilities {
+  .text-shadow-hero {
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.6);
+  }
+  
+  .glass-dark {
+    background: rgba(18, 25, 20, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .glass-light {
+    background: rgba(250, 247, 242, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(22, 40, 29, 0.08);
+  }
+
+  .border-estate-subtle {
+    border-color: rgba(194, 162, 111, 0.25);
+  }
+
+  /* Luxury Card Hover Transition */
+  .card-luxury {
+    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.4s ease;
+  }
+  .card-luxury:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 35px -10px rgba(22, 40, 29, 0.16), 0 0 15px rgba(194, 162, 111, 0.12);
+    border-color: rgba(194, 162, 111, 0.5);
+  }
+
+  /* Image Zoom on Card Hover */
+  .img-zoom-container {
+    overflow: hidden;
+  }
+  .img-zoom-target {
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+  }
+  .group:hover .img-zoom-target {
+    transform: scale(1.06);
+  }
+
+  /* Subtle Gold Underline Draw for Links */
+  .link-underline-draw {
+    position: relative;
+    display: inline-block;
+  }
+  .link-underline-draw::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 1.5px;
+    background-color: #C2A26F;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  .link-underline-draw:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  /* Pulsing Ambient Gold Dot */
+  @keyframes pulseGlow {
+    0%, 100% {
+      opacity: 0.6;
+      transform: scale(1);
+      box-shadow: 0 0 0 0 rgba(194, 162, 111, 0.4);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.05);
+      box-shadow: 0 0 10px 3px rgba(194, 162, 111, 0.6);
+    }
+  }
+
+  .pulse-glow {
+    animation: pulseGlow 3s ease-in-out infinite;
+  }
+
+  /* Subtle Fade In Up */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  /* Content entrance for the process display panel & watermark */
+  @keyframes stepPanelIn {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .animate-step-panel {
+    animation: stepPanelIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  /* Expanding pulse ring around the active icon medallion */
+  @keyframes ringPulse {
+    0% {
+      transform: scale(1);
+      opacity: 0.7;
+    }
+    100% {
+      transform: scale(1.8);
+      opacity: 0;
+    }
+  }
+  .animate-ring-pulse {
+    animation: ringPulse 2.2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  }
+
+  /* Slow ambient drift for decorative background orbs */
+  @keyframes driftSlow {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    50% {
+      transform: translate3d(28px, -22px, 0) scale(1.08);
+    }
+  }
+  .animate-drift-slow {
+    animation: driftSlow 16s ease-in-out infinite;
+  }
+
+  /* Cart bag bounce when an item is added */
+  @keyframes bagBump {
+    0% {
+      transform: scale(1) rotate(0deg);
+    }
+    25% {
+      transform: scale(1.35) rotate(-12deg);
+    }
+    45% {
+      transform: scale(0.92) rotate(7deg);
+    }
+    65% {
+      transform: scale(1.12) rotate(-4deg);
+    }
+    100% {
+      transform: scale(1) rotate(0deg);
+    }
+  }
+  .animate-bag-bump {
+    animation: bagBump 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  /* Badge pop-in, re-triggered on each count change */
+  @keyframes badgePop {
+    0% {
+      transform: scale(0);
+    }
+    60% {
+      transform: scale(1.45);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  .animate-badge-pop {
+    animation: badgePop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  }
+
+  /* Hide scrollbar for horizontal card rails (keep scrollability) */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Infinite certification marquee */
+  @keyframes marqueeScroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  .marquee-track {
+    animation: marqueeScroll 42s linear infinite;
+  }
+
+  /* General-purpose entrances (used across pages but previously missing) */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out both;
+  }
+
+  @keyframes slideInRight {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+  .animate-slide-in {
+    animation: slideInRight 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  @keyframes scaleUp {
+    from {
+      opacity: 0;
+      transform: scale(0.94);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  .animate-scale-up {
+    animation: scaleUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  /* Slow Ken Burns drift for hero imagery */
+  @keyframes pulseSlow {
+    0%,
+    100% {
+      transform: scale(1.05);
+    }
+    50% {
+      transform: scale(1.12);
+    }
+  }
+  .animate-pulse-slow {
+    animation: pulseSlow 22s ease-in-out infinite;
+  }
+
+  /* Gentle float for decorative / CTA elements */
+  @keyframes floatY {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+  .animate-float {
+    animation: floatY 5s ease-in-out infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-step-panel,
+  .animate-ring-pulse,
+  .animate-drift-slow,
+  .animate-pulse-slow,
+  .animate-float,
+  .marquee-track {
+    animation: none;
+  }
+  .animate-fade-in,
+  .animate-slide-in,
+  .animate-scale-up {
+    animation-duration: 0.01s;
+  }
+}
+
+/* Custom smooth scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #16281D;
+}
+::-webkit-scrollbar-thumb {
+  background: #3D5A45;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #C2A26F;
+}
