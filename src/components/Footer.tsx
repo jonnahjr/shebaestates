@@ -19,10 +19,11 @@ export const Footer: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
   return (
-    <footer className="bg-estate-dark text-estate-sand/90 border-t border-estate-gold/20 pt-16 sm:pt-20 pb-12 font-sans">
+    <footer className="bg-estate-dark text-estate-sand/90 border-t border-estate-gold/20 pt-16 sm:pt-20 pb-12 font-sans relative">
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Top Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8 pb-14 border-b border-white/10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8 pb-14 border-b border-white/10">
           {/* Brand & Mission Column (Col 1-2) */}
           <div className="lg:col-span-2 space-y-6">
             <div className="flex items-center gap-3">

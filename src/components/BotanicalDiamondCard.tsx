@@ -32,7 +32,7 @@ export const BotanicalDiamondCard: React.FC<BotanicalDiamondCardProps> = ({ diam
             DIAMOND {diamond.number}
           </span>
           {diamond.ethiopianName && (
-            <span className="text-xs font-serif text-estate-sand/95 bg-estate-forest/85 backdrop-blur-md px-3.5 py-1 border border-white/15 rounded-full shadow-sm group-hover:border-estate-gold/40 transition-colors">
+            <span className="text-xs font-amharic text-estate-gold bg-black/75 backdrop-blur-md px-3.5 py-1 border border-estate-gold/40 rounded-full shadow-sm group-hover:border-estate-gold transition-colors">
               {diamond.ethiopianName}
             </span>
           )}

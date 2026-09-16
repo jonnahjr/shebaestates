@@ -4,33 +4,56 @@ import { CountUp } from './CountUp';
 import { Reveal } from './Reveal';
 
 const STATS = [
-  { icon: Mountain, end: 2250, suffix: 'm', label: 'Peak Estate Altitude' },
-  { icon: Trees, end: 20, suffix: '+', label: 'Native Canopy Species Protected' },
-  { icon: Users, end: 120, suffix: '+', label: 'Highland Farming Families' },
-  { icon: Globe2, end: 4, suffix: '', label: 'Continental Trade Hubs' }
+  { icon: Mountain, end: 2250, suffix: 'm', label: 'Peak Estate Altitude', amharic: 'ከፍታ' },
+  { icon: Trees, end: 20, suffix: '+', label: 'Canopy Species Protected', amharic: 'የደን ዝርያዎች' },
+  { icon: Users, end: 120, suffix: '+', label: 'Farming Families', amharic: 'አርሶ አደሮች' },
+  { icon: Globe2, end: 4, suffix: '', label: 'Trade Hubs Worldwide', amharic: 'ማዕከላት' }
 ];
 
-/** Full-width estate statistics band with animated count-up numbers. */
+/**
+ * Compact estate statistics band — a slim horizontal strip with hairline
+ * dividers, inline icons, and small serif count-up numbers.
+ */
 export const StatsBand: React.FC = () => {
   return (
-    <section className="relative bg-estate-forest text-estate-sand border-y border-estate-gold/20 overflow-hidden">
-      {/* Ambient gold orb */}
-      <div className="absolute top-0 right-1/4 w-80 h-80 bg-estate-gold/[0.07] rounded-full blur-3xl pointer-events-none animate-drift-slow" />
+    <section
+      className="relative bg-estate-forest text-estate-sand border-y border-estate-gold/20 overflow-hidden"
+      aria-label="Estate statistics"
+    >
+      {/* Ambient gold orb — very subtle */}
+      <div className="absolute top-0 right-1/4 w-64 h-64 bg-estate-gold/[0.06] rounded-full blur-3xl pointer-events-none animate-drift-slow" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-16 relative z-10">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid grid-cols-2 lg:grid-cols-4">
           {STATS.map((stat, idx) => {
             const Icon = stat.icon;
             return (
-              <Reveal key={stat.label} delay={idx * 100}>
-                <div className="text-center group cursor-default">
-                  <Icon className="w-6 h-6 text-estate-gold mx-auto mb-3 transition-transform duration-500 group-hover:scale-110" />
-                  <span className="block font-serif text-4xl sm:text-5xl text-estate-sand leading-none">
-                    <CountUp end={stat.end} suffix={stat.suffix} />
+              <Reveal key={stat.label} delay={idx * 80}>
+                <div
+                  className={`group flex items-center gap-3.5 sm:gap-4 py-5 sm:py-7 px-2 sm:px-6 lg:px-8 cursor-default ${
+                    // vertical hairline dividers
+                    idx % 2 === 1 ? 'border-l border-white/10 lg:border-l' : 'lg:border-l'
+                  } ${idx >= 2 ? 'border-t border-white/10 lg:border-t-0' : ''} ${
+                    idx === 0 ? 'lg:border-l-0' : ''
+                  }`}
+                >
+                  {/* Icon medallion */}
+                  <span className="shrink-0 w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-estate-gold/30 bg-estate-gold/[0.08] flex items-center justify-center transition-all duration-500 group-hover:border-estate-gold/70 group-hover:bg-estate-gold/15">
+                    <Icon className="w-4 h-4 sm:w-[18px] sm:h-[18px] text-estate-gold transition-transform duration-500 group-hover:scale-110" />
                   </span>
-                  <span className="mt-2 block text-[10px] sm:text-[11px] uppercase tracking-widest text-estate-sand/60 font-sans">
-                    {stat.label}
+
+                  {/* Number + labels */}
+                  <span className="min-w-0">
+                    <span className="block font-serif text-2xl sm:text-3xl text-estate-sand leading-none tracking-tight">
+                      <CountUp end={stat.end} suffix={stat.suffix} />
                     </span>
+                    <span className="mt-1 block text-[9px] sm:text-[10px] uppercase tracking-widest text-estate-sand/55 font-sans leading-tight truncate group-hover:text-estate-sand/80 transition-colors duration-300">
+                      {stat.label}
+                    </span>
+                    <span className="hidden sm:block font-amharic text-[10px] text-estate-gold/60 font-light leading-tight mt-0.5">
+                      {stat.amharic}
+                    </span>
+                  </span>
                 </div>
               </Reveal>
             );

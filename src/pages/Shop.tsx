@@ -76,9 +76,9 @@ export const Shop: React.FC = () => {
       </section>
 
       {/* Filter Tabs */}
-      <section className="bg-estate-cream/70 border-b border-estate-charcoal/10 sticky top-[69px] z-20 backdrop-blur-md">
+      <section className="bg-estate-cream/70 border-b border-estate-charcoal/10 sticky top-[57px] sm:top-[69px] z-20 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-          <div className="flex gap-2 overflow-x-auto whitespace-nowrap py-1">
+          <div className="flex gap-2 overflow-x-auto whitespace-nowrap py-1 scrollbar-hide" style={{ WebkitOverflowScrolling: 'touch' }}>
             {categories.map(cat => {
               const active = selectedCategory === cat.id;
               return (

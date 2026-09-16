@@ -99,15 +99,7 @@ export const QualityProcess: React.FC = () => {
                             ? 'bg-estate-gold border-estate-gold shadow-[0_0_12px_rgba(194,162,111,0.9)]'
                             : 'bg-estate-forest border-white/25 group-hover/step:border-estate-gold/60'
                         }`}
-                      />
-                      <span
-                        className={`font-serif text-lg font-light w-8 shrink-0 transition-colors duration-300 ${
-                          isActive ? 'text-estate-gold' : 'text-estate-sand/35 group-hover/step:text-estate-sand/70'
-                        }`}
-                      >
-                        {step.number}
-                      </span>
-                      <span className="flex-1 min-w-0">
+                      />                      <span className="flex-1 min-w-0">
                         <span
                           className={`block font-serif text-lg leading-tight transition-colors duration-300 ${
                             isActive ? 'text-white' : 'text-estate-sand/80'
@@ -141,15 +133,6 @@ export const QualityProcess: React.FC = () => {
               onMouseLeave={() => setHoverPaused(false)}
             >
               <div className="relative h-full min-h-[440px] p-10 xl:p-14 rounded-3xl border border-white/10 bg-gradient-to-br from-estate-forest-light/60 via-estate-forest-light/30 to-transparent overflow-hidden flex flex-col">
-                {/* Watermark phase number */}
-                <div
-                  key={`wm-${activeStep}`}
-                  aria-hidden="true"
-                  className="absolute -right-4 -bottom-12 font-serif text-[200px] leading-none text-estate-gold/5 select-none pointer-events-none animate-step-panel"
-                >
-                  {PROCESS_STEPS[activeStep].number}
-                </div>
-
                 {/* Icon medallion with expanding pulse ring */}
                 <div className="relative inline-flex items-center justify-center w-16 h-16 rounded-full border border-estate-gold/40 bg-estate-gold/10 mb-8">
                   <span className="absolute inset-0 rounded-full border border-estate-gold/30 animate-ring-pulse" />
@@ -158,13 +141,6 @@ export const QualityProcess: React.FC = () => {
 
                 {/* Animated content — re-enters on every phase change */}
                 <div key={`panel-${activeStep}`} className="relative animate-step-panel">
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="h-px w-8 bg-estate-gold/60" />
-                    <span className="text-[11px] uppercase tracking-luxury text-estate-gold font-sans font-semibold">
-                      Phase {PROCESS_STEPS[activeStep].number}
-                    </span>
-                  </div>
-
                   <h3 className="font-serif text-3xl xl:text-4xl text-white leading-tight mb-3">
                     {PROCESS_STEPS[activeStep].title}
                   </h3>
@@ -182,7 +158,7 @@ export const QualityProcess: React.FC = () => {
                   </p>
                 </div>
 
-                {/* Phase progress dots + counter */}
+                {/* Phase progress dots */}
                 <div className="relative mt-auto pt-10 flex items-center gap-2">
                   {PROCESS_STEPS.map((s, i) => (
                     <button
@@ -194,9 +170,6 @@ export const QualityProcess: React.FC = () => {
                       }`}
                     />
                   ))}
-                  <span className="ml-4 text-[10px] uppercase tracking-widest text-estate-sand/40 font-mono">
-                    {String(activeStep + 1).padStart(2, '0')} / {String(PROCESS_STEPS.length).padStart(2, '0')}
-                  </span>
                 </div>
               </div>
             </div>
@@ -223,13 +196,6 @@ export const QualityProcess: React.FC = () => {
                     aria-expanded={isOpen}
                     className="w-full flex items-center gap-4 p-5 text-left"
                   >
-                    <span
-                      className={`font-serif text-2xl font-light transition-colors duration-300 ${
-                        isOpen ? 'text-estate-gold' : 'text-estate-sand/40'
-                      }`}
-                    >
-                      {step.number}
-                    </span>
                     <span className="flex-1 min-w-0">
                       <span className="block font-serif text-lg text-estate-sand leading-tight">
                         {step.title}

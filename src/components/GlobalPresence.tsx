@@ -52,16 +52,6 @@ export const GlobalPresence: React.FC = () => {
                       </p>
                     </div>
                   </div>
-
-                  <span
-                    className={`text-[10px] uppercase tracking-widest font-mono px-3 py-1 rounded-full ${
-                      isSelected
-                        ? 'bg-estate-moss text-estate-gold border border-estate-gold/40'
-                        : 'bg-estate-sand text-estate-muted'
-                    }`}
-                  >
-                    Hub 0{idx + 1}
-                  </span>
                 </button>
               );
             })}

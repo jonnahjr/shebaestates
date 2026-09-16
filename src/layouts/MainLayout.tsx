@@ -41,7 +41,13 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children, isHeroPage = f
 
       {/* Floating quick-contact widget */}
       {!isStorePage && (
-        <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-3">
+        <div
+          className="fixed bottom-6 right-5 sm:right-6 z-40 flex flex-col items-end gap-3"
+          style={{
+            bottom: 'max(1.5rem, env(safe-area-inset-bottom))',
+            right: 'max(1.25rem, env(safe-area-inset-right))'
+          }}
+        >
           {/* Back to top */}
           {showTop && (
             <button
@@ -84,7 +90,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children, isHeroPage = f
             onClick={() => setExpanded(e => !e)}
             aria-label={expanded ? 'Close quick contact' : 'Open quick contact'}
             aria-expanded={expanded}
-            className={`relative p-4 rounded-full shadow-xl transition-all duration-300 ${
+            className={`relative p-4 rounded-full shadow-xl transition-all duration-300 min-h-[52px] min-w-[52px] flex items-center justify-center ${
               expanded
                 ? 'bg-estate-charcoal text-estate-sand rotate-90'
                 : 'bg-estate-gold text-estate-forest hover:scale-110 hover:shadow-2xl animate-float'

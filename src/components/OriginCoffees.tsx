@@ -4,16 +4,19 @@ import {
   ArrowRight,
   Mountain,
   MapPin,
-  ShoppingBag,
+  MessageCircle,
   Eye,
   ChevronLeft,
   ChevronRight
 } from 'lucide-react';
-import { SectionHeading } from './SectionHeading';
+import { SectionHeading } from "./SectionHeading";
 import { Reveal } from './Reveal';
 import { ORIGIN_COFFEES } from '../data/company';
 
 const ORIGIN_IMAGE = '/assets/images/type%20seel%201.png';
+
+/** Estate WhatsApp business line — international format without + or symbols */
+const WHATSAPP_NUMBER = '2510966213636';
 
 /**
  * Single-Origin wholesale coffee collection — one horizontal sliding rail of
@@ -100,7 +103,8 @@ export const OriginCoffees: React.FC = () => {
             <div
               ref={railRef}
               onScroll={updateScrollState}
-              className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-2 px-6 sm:px-10"
+              className="flex gap-4 sm:gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-2 px-4 sm:px-10"
+              style={{ WebkitOverflowScrolling: 'touch', scrollPaddingLeft: '1rem' }}
             >
               {ORIGIN_COFFEES.map((coffee, idx) => {
                 const isHovered = hoveredIdx === idx;
@@ -111,7 +115,7 @@ export const OriginCoffees: React.FC = () => {
                     data-origin-card
                     onMouseEnter={() => setHoveredIdx(idx)}
                     onMouseLeave={() => setHoveredIdx(null)}
-                    className={`group relative shrink-0 w-[300px] sm:w-[360px] snap-start flex flex-col rounded-2xl border bg-white overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)] ${
+                    className={`group relative shrink-0 w-[272px] xs:w-[300px] sm:w-[360px] snap-start flex flex-col rounded-2xl border bg-white overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)] ${
                       isHovered
                         ? 'border-estate-gold -translate-y-2'
                         : 'border-estate-charcoal/10'
@@ -137,10 +141,17 @@ export const OriginCoffees: React.FC = () => {
                     </div>
 
                     {/* Card body */}
-                    <div className="flex flex-col flex-1 p-5">
-                      <h3 className="font-serif text-xl text-estate-forest leading-tight">
-                        {coffee.name} Coffee
-                      </h3>
+                    <div className="flex flex-col flex-1 p-4 xs:p-5">
+                      <div className="flex items-start justify-between gap-2">
+                        <h3 className="font-serif text-xl text-estate-forest leading-tight">
+                          {coffee.name} Coffee
+                        </h3>
+                        {coffee.amharicName && (
+                          <span className="font-amharic text-xs text-estate-gold bg-estate-forest/90 px-2.5 py-0.5 rounded-full border border-estate-gold/30 shrink-0 shadow-xs">
+                            {coffee.amharicName}
+                          </span>
+                        )}
+                      </div>
                       <p className="mt-1 flex items-center gap-1.5 text-[11px] text-estate-muted font-sans">
                         <MapPin className="w-3 h-3 text-estate-brass shrink-0" />
                         {coffee.origin}
@@ -159,13 +170,17 @@ export const OriginCoffees: React.FC = () => {
 
                       {/* Actions */}
                       <div className="mt-auto pt-4 flex items-center gap-2">
-                        <Link
-                          to="/contact"
+                        <a
+                          href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+                            `Hello Queen of Sheba Highland Estate, I would like to order ${coffee.name} coffee (${coffee.format}).`
+                          )}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
                           className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-full bg-estate-forest text-estate-sand text-[10px] uppercase tracking-widest font-semibold transition-all duration-300 hover:bg-estate-gold hover:text-estate-forest active:scale-95"
                         >
-                          <ShoppingBag className="w-3.5 h-3.5" />
+                          <MessageCircle className="w-3.5 h-3.5" />
                           Order Now
-                        </Link>
+                        </a>
                         <Link
                           to={`/products/coffee#${coffee.name.toLowerCase()}`}
                           className="inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-full border border-estate-charcoal/15 text-estate-forest/80 text-[10px] uppercase tracking-widest font-semibold transition-all duration-300 hover:border-estate-gold hover:text-estate-brass"

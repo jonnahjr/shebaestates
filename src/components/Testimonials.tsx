@@ -62,8 +62,8 @@ export const Testimonials: React.FC = () => {
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
           >
-            <div className="relative p-8 sm:p-12 bg-white border border-estate-charcoal/10 rounded-3xl text-center transition-all duration-500 hover:border-estate-gold/50">
-              <Quote className="w-10 h-10 text-estate-gold/30 mx-auto mb-6" />
+            <div className="relative p-6 xs:p-8 sm:p-12 bg-white border border-estate-charcoal/10 rounded-3xl text-center transition-all duration-500 hover:border-estate-gold/50">
+              <Quote className="w-8 h-8 sm:w-10 sm:h-10 text-estate-gold/30 mx-auto mb-4 sm:mb-6" />
 
               {/* Animated quote content — re-enters on change */}
               <div key={active} className="animate-fade-in">

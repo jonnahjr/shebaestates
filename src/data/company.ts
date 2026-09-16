@@ -113,6 +113,7 @@ export const SUSTAINABILITY_PILLARS: SustainabilityPillar[] = [
 
 export interface OriginCoffee {
   name: string;
+  amharicName?: string;
   format: string;
   origin: string;
   notes: string;
@@ -122,6 +123,7 @@ export interface OriginCoffee {
 export const ORIGIN_COFFEES: OriginCoffee[] = [
   {
     name: 'Kochere',
+    amharicName: 'ኮቸሬ',
     format: '50kg, 60kg & 1 Ton',
     origin: 'Gedeo Zone, SNNPR',
     notes: 'Apricot, bergamot & jasmine florals',
@@ -129,6 +131,7 @@ export const ORIGIN_COFFEES: OriginCoffee[] = [
   },
   {
     name: 'Bonga',
+    amharicName: 'ቦንጋ',
     format: '50kg, 60kg & 1 Ton',
     origin: 'Kaffa Forest, SNNPR',
     notes: 'Wild forest spice & stone fruit',
@@ -136,6 +139,7 @@ export const ORIGIN_COFFEES: OriginCoffee[] = [
   },
   {
     name: 'Kenbata',
+    amharicName: 'ከምባታ',
     format: '50kg, 60kg & 1 Ton',
     origin: 'Hadiya Zone, SNNPR',
     notes: 'Stone fruit sweetness & tea body',
@@ -143,6 +147,7 @@ export const ORIGIN_COFFEES: OriginCoffee[] = [
   },
   {
     name: 'Benchimaji',
+    amharicName: 'ቤንች ማጂ',
     format: '50kg, 60kg & 1 Ton',
     origin: 'Bench Maji Zone, SNNPR',
     notes: 'Chocolate depth & gentle spice',
@@ -150,6 +155,7 @@ export const ORIGIN_COFFEES: OriginCoffee[] = [
   },
   {
     name: 'Illubabor',
+    amharicName: 'ኢሉባቦር',
     format: '50kg, 60kg & 1 Ton',
     origin: 'Illubabor Zone, Oromia',
     notes: 'Forest honey & dried fig',
@@ -157,6 +163,7 @@ export const ORIGIN_COFFEES: OriginCoffee[] = [
   },
   {
     name: 'Mizan Tepi',
+    amharicName: 'ሚዛን ቴፒ',
     format: '50kg, 60kg & 1 Ton',
     origin: 'Bench Maji Corridor, SNNPR',
     notes: 'Ripe plum & cacao nib',
@@ -164,6 +171,7 @@ export const ORIGIN_COFFEES: OriginCoffee[] = [
   },
   {
     name: 'Anderacha',
+    amharicName: 'አንደራቻ',
     format: '50kg, 60kg & 1 Ton',
     origin: 'Sheka Zone, SNNPR',
     notes: 'Tropical florals & citrus zest',
@@ -171,6 +179,7 @@ export const ORIGIN_COFFEES: OriginCoffee[] = [
   },
   {
     name: 'Gesha',
+    amharicName: 'ጌሻ',
     format: '50kg, 60kg & 1 Ton',
     origin: 'Bench Maji Highlands, SNNPR',
     notes: 'Jasmine, peach & noble florals',

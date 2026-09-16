@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ChevronDown, Sparkles, ArrowUpRight } from 'lucide-react';
+import { ArrowRight, ChevronDown, ArrowUpRight } from 'lucide-react';
 import { MainLayout } from '../layouts/MainLayout';
 import { SectionHeading } from '../components/SectionHeading';
 import { BotanicalDiamondCard } from '../components/BotanicalDiamondCard';
@@ -9,6 +9,7 @@ import { OriginCoffees } from '../components/OriginCoffees';
 import { CertificationsMarquee } from '../components/CertificationsMarquee';
 import { StatsBand } from '../components/StatsBand';
 import { Testimonials } from '../components/Testimonials';
+import { CoffeeCeremony } from '../components/CoffeeCeremony';
 import { GlobalPresence } from '../components/GlobalPresence';
 import { SEO } from '../components/SEO';
 import { BOTANICAL_DIAMONDS } from '../data/products';
@@ -24,7 +25,7 @@ export const Home: React.FC = () => {
       />
 
       {/* 1. HERO SECTION */}
-      <section className="relative min-h-[95vh] lg:min-h-screen flex items-center justify-center text-center overflow-hidden bg-estate-forest">
+      <section className="relative min-h-[100svh] lg:min-h-screen flex items-center justify-center text-center overflow-hidden bg-estate-forest">
         {/* Background Image with Dark Vignette Gradient */}
         <div className="absolute inset-0 z-0">
           <img
@@ -38,11 +39,12 @@ export const Home: React.FC = () => {
 
         {/* Hero Content */}
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 flex flex-col items-center">
-          {/* Eyebrow */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 border border-estate-gold/40 bg-black/40 backdrop-blur-md mb-6 animate-fade-in">
-            <Sparkles className="w-3.5 h-3.5 text-estate-gold" />
+          {/* Eyebrow badge with Ethiopian Flag Pin */}
+          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 border border-estate-gold/40 bg-black/50 backdrop-blur-md mb-6 rounded-full animate-fade-in shadow-[0_0_20px_rgba(194,162,111,0.15)]">
+            <span className="text-sm">🇪🇹</span>
+            <span className="w-1 h-1 rounded-full bg-estate-gold animate-ping" />
             <span className="text-[11px] uppercase tracking-luxury text-estate-gold font-sans font-semibold">
-              QUEEN OF SHEBA HIGHLAND ESTATE
+              ORIGIN OF COFFEE & HIGHLAND BOTANICALS
             </span>
           </div>
 
@@ -54,8 +56,19 @@ export const Home: React.FC = () => {
             </span>
           </h1>
 
+          {/* Amharic proverb banner with bilingual glow */}
+          <div className="mt-5 inline-flex items-center gap-3 px-5 py-2 rounded-full bg-estate-forest-light/60 border border-estate-gold/30 backdrop-blur-md animate-fade-in shadow-sm">
+            <span className="font-amharic text-estate-gold text-lg sm:text-xl font-medium tracking-wide">
+              ቡና የኢትዮጵያ ልብ ነው
+            </span>
+            <span className="w-1 h-3 bg-estate-gold/40 rounded-full" />
+            <span className="text-xs font-serif italic text-estate-sand/80">
+              "Coffee is the heart of Ethiopia"
+            </span>
+          </div>
+
           {/* Supporting Manifesto */}
-          <p className="mt-6 sm:mt-8 text-base sm:text-xl font-light text-estate-sand/90 max-w-2xl leading-relaxed">
+          <p className="mt-4 sm:mt-6 text-base sm:text-xl font-light text-estate-sand/90 max-w-2xl leading-relaxed">
             Exceptional coffee, saffron, vanilla, and macadamia cultivated with care, rooted in the land, and prepared for the world.
           </p>
 
@@ -78,7 +91,7 @@ export const Home: React.FC = () => {
           </div>
 
           {/* Micro Origin Badges */}
-          <div className="mt-14 pt-8 border-t border-white/10 grid grid-cols-2 sm:grid-cols-4 gap-6 text-center text-xs text-estate-sand/80 font-light">
+          <div className="mt-12 sm:mt-14 pt-8 border-t border-white/10 grid grid-cols-2 sm:grid-cols-4 gap-5 sm:gap-6 text-center text-xs text-estate-sand/80 font-light">
             <div>
               <span className="block font-serif text-estate-gold text-lg">1,800–2,250m</span>
               <span>Highland Altitude</span>
@@ -161,22 +174,27 @@ export const Home: React.FC = () => {
                 All our Botanical Diamonds are sourced exclusively from pristine highland estates around Lake Tana and the Amhara Region. By upholding regenerative farming methods and prioritizing soil microbiological vitality, we guarantee consistent and extraordinary offerings for our international partners.
               </p>
 
-              {/* Interactive 4 Botanical Diamonds Micro-Cards */}
+              {/* Interactive 4 Botanical Diamonds Micro-Cards with Ethiopian Names */}
               <div className="grid grid-cols-2 gap-2.5 pt-2">
                 {[
-                  { name: '01 Gesha Coffee', desc: 'Zege Peninsula' },
-                  { name: '02 Negin Saffron', desc: 'Tana Plateau' },
-                  { name: '03 Highland Vanilla', desc: 'Lake Canopy' },
-                  { name: '04 Macadamia', desc: 'Amhara Basin' },
+                  { name: '01 Gesha Coffee', amharic: 'ዘጌ ቡና', desc: 'Zege Peninsula' },
+                  { name: '02 Negin Saffron', amharic: 'ንጉሥ ኩርኩም', desc: 'Tana Plateau' },
+                  { name: '03 Highland Vanilla', amharic: 'የከፍታ ቫኒላ', desc: 'Lake Canopy' },
+                  { name: '04 Macadamia', amharic: 'ማካዳሚያ ነት', desc: 'Amhara Basin' },
                 ].map(item => (
                   <div
                     key={item.name}
-                    className="p-3 bg-white/80 border border-estate-charcoal/10 rounded-xl hover:border-estate-gold/60 hover:bg-white hover:-translate-y-0.5 hover:shadow-md transition-all duration-300 ease-out group/chip cursor-default"
+                    className="p-3 bg-white/85 border border-estate-charcoal/10 rounded-xl hover:border-estate-gold/70 hover:bg-white hover:-translate-y-0.5 hover:shadow-md transition-all duration-300 ease-out group/chip cursor-default"
                   >
-                    <p className="text-xs font-serif font-semibold text-estate-forest group-hover/chip:text-estate-gold transition-colors duration-300">
-                      {item.name}
-                    </p>
-                    <p className="text-[10px] text-estate-muted font-light mt-0.5">
+                    <div className="flex items-center justify-between gap-1">
+                      <p className="text-xs font-serif font-semibold text-estate-forest group-hover/chip:text-estate-gold transition-colors duration-300">
+                        {item.name}
+                      </p>
+                      <span className="font-amharic text-[10px] text-estate-gold/90 font-light">
+                        {item.amharic}
+                      </span>
+                    </div>
+                    <p className="text-[10px] text-estate-muted font-light mt-1">
                       {item.desc}
                     </p>
                   </div>
@@ -327,6 +345,9 @@ export const Home: React.FC = () => {
 
       {/* 4c. CERTIFICATIONS & MEMBERSHIPS MARQUEE */}
       <CertificationsMarquee />
+
+      {/* 4d. ETHIOPIAN BUNA CEREMONY */}
+      <CoffeeCeremony />
 
       {/* 5. ORIGIN / ESTATE SECTION */}
       <section className="py-24 sm:py-32 bg-estate-sand text-estate-forest relative">

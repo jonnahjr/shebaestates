@@ -3,6 +3,30 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ShoppingBag, Globe } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 
+/** Locks body scroll while the mobile drawer is open (with position restoration) */
+function useBodyScrollLock(locked: boolean) {
+  useEffect(() => {
+    if (!locked) return;
+    const scrollY = window.scrollY;
+    const body = document.body;
+    const prevOverflow = body.style.overflow;
+    const prevPosition = body.style.position;
+    const prevTop = body.style.top;
+    body.style.overflow = 'hidden';
+    body.style.position = 'fixed';
+    body.style.top = `-${scrollY}px`;
+    body.style.left = '0';
+    body.style.right = '0';
+    body.style.width = '100%';
+    return () => {
+      body.style.overflow = prevOverflow;
+      body.style.position = prevPosition;
+      body.style.top = prevTop;
+      window.scrollTo(0, scrollY);
+    };
+  }, [locked]);
+}
+
 interface NavbarProps {
   isHeroPage?: boolean;
 }
@@ -45,6 +69,8 @@ export const Navbar: React.FC<NavbarProps> = ({ isHeroPage = false }) => {
     setMobileMenuOpen(false);
   }, [location.pathname]);
 
+  useBodyScrollLock(mobileMenuOpen);
+
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'Our Story', path: '/about' },
@@ -65,7 +91,13 @@ export const Navbar: React.FC<NavbarProps> = ({ isHeroPage = false }) => {
             : 'bg-estate-forest/95 backdrop-blur-md text-estate-sand py-3.5 sm:py-4 shadow-xl border-b border-estate-gold/20'
         }`}
       >
-        <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 flex items-center justify-between">
+        <div
+          className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 flex items-center justify-between"
+          style={{
+            paddingLeft: 'max(1rem, env(safe-area-inset-left))',
+            paddingRight: 'max(1rem, env(safe-area-inset-right))'
+          }}
+        >
           {/* Logo & Brand Name (Left Side) */}
           <Link
             to="/"
@@ -78,12 +110,16 @@ export const Navbar: React.FC<NavbarProps> = ({ isHeroPage = false }) => {
               className="h-14 sm:h-16 lg:h-18 w-auto object-contain transition-all duration-500 group-hover:scale-105 group-hover:brightness-110 drop-shadow-[0_4px_12px_rgba(0,0,0,0.35)]"
             />
             <div className="flex flex-col text-left justify-center">
-              <span className="font-serif text-xl sm:text-2xl font-semibold tracking-wider text-estate-sand leading-none group-hover:text-white transition-colors duration-300">
-                QUEEN OF SHEBA
-              </span>
-              <span className="text-[10px] sm:text-[11px] uppercase tracking-[0.28em] text-estate-gold font-sans font-medium mt-1.5 group-hover:tracking-[0.32em] transition-all duration-500">
-                HIGHLAND ESTATE CO.
-              </span>
+              <div className="flex items-center gap-2">
+                <span className="font-serif text-xl sm:text-2xl font-semibold tracking-wider text-estate-sand leading-none group-hover:text-white transition-colors duration-300">
+                  QUEEN OF SHEBA
+                </span>
+              </div>
+              <div className="flex items-center gap-2 mt-1">
+                <span className="text-[10px] sm:text-[11px] uppercase tracking-[0.28em] text-estate-gold font-sans font-medium group-hover:tracking-[0.32em] transition-all duration-500">
+                  HIGHLAND ESTATE CO.
+                </span>
+              </div>
             </div>
           </Link>
 
@@ -206,43 +242,59 @@ export const Navbar: React.FC<NavbarProps> = ({ isHeroPage = false }) => {
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-30 bg-estate-forest/98 backdrop-blur-xl flex flex-col justify-between pt-24 pb-8 px-6 lg:hidden animate-fade-in">
-          <div className="flex flex-col space-y-5">
-            <p className="text-[10px] uppercase tracking-widest2 text-estate-gold font-sans">
-              Estate Navigation
-            </p>
-            {navLinks.map((link, idx) => (
+        <>
+          {/* Tap-to-close backdrop */}
+          <div
+            className="fixed inset-0 z-20 bg-black/50 lg:hidden"
+            onClick={() => setMobileMenuOpen(false)}
+            aria-hidden="true"
+          />
+          <div
+            className="fixed inset-0 z-30 bg-estate-forest/98 backdrop-blur-xl flex flex-col justify-between pt-24 pb-8 px-6 lg:hidden animate-fade-in"
+            style={{
+              paddingBottom: 'max(2rem, env(safe-area-inset-bottom))'
+            }}
+          >
+            <div className="flex flex-col space-y-5 overflow-y-auto">
+              <div className="flex items-baseline justify-between">
+                <p className="text-[10px] uppercase tracking-widest2 text-estate-gold font-sans">
+                  Estate Navigation
+                </p>
+                <span className="font-amharic text-sm text-estate-gold/70">ንግሥተ ሳባ</span>
+              </div>
+              {navLinks.map((link, idx) => (
+                <Link
+                  key={link.name}
+                  to={link.path}
+                  className="font-serif text-2xl text-estate-sand hover:text-estate-gold transition-colors flex items-baseline justify-between border-b border-white/5 pb-2"
+                >
+                  <span>{link.name}</span>
+                  <span className="text-xs font-sans text-estate-gold/60 font-light">0{idx + 1}</span>
+                </Link>
+              ))}
               <Link
-                key={link.name}
-                to={link.path}
+                to="/shop"
+                className="font-serif text-2xl text-estate-gold hover:text-estate-sand transition-colors flex items-baseline justify-between border-b border-white/5 pb-2"
+              >
+                <span>Store / Direct Order</span>
+                <span className="text-xs font-sans text-estate-gold/60 font-light">07</span>
+              </Link>
+              <Link
+                to="/contact"
                 className="font-serif text-2xl text-estate-sand hover:text-estate-gold transition-colors flex items-baseline justify-between border-b border-white/5 pb-2"
               >
-                <span>{link.name}</span>
-                <span className="text-xs font-sans text-estate-gold/60 font-light">0{idx + 1}</span>
+                <span>Contact & Export Inquiries</span>
+                <span className="text-xs font-sans text-estate-gold/60 font-light">08</span>
               </Link>
-            ))}
-            <Link
-              to="/shop"
-              className="font-serif text-2xl text-estate-gold hover:text-estate-sand transition-colors flex items-baseline justify-between border-b border-white/5 pb-2"
-            >
-              <span>Store / Direct Order</span>
-              <span className="text-xs font-sans text-estate-gold/60 font-light">07</span>
-            </Link>
-            <Link
-              to="/contact"
-              className="font-serif text-2xl text-estate-sand hover:text-estate-gold transition-colors flex items-baseline justify-between border-b border-white/5 pb-2"
-            >
-              <span>Contact & Export Inquiries</span>
-              <span className="text-xs font-sans text-estate-gold/60 font-light">08</span>
-            </Link>
-          </div>
+            </div>
 
-          <div className="border-t border-white/10 pt-6 flex flex-col space-y-2 text-xs text-estate-sand/70">
-            <p className="text-estate-gold font-serif text-sm">Queen of Sheba Highland Estate Co.</p>
-            <p>Lake Tana Basin, Bahir Dar, Amhara Region, Ethiopia</p>
-            <p className="text-estate-sand/50">info@shebaestates.com • +251-096 621 3636</p>
+            <div className="border-t border-white/10 pt-6 flex flex-col space-y-2 text-xs text-estate-sand/70">
+              <p className="text-estate-gold font-serif text-sm">Queen of Sheba Highland Estate Co.</p>
+              <p>Lake Tana Basin, Bahir Dar, Amhara Region, Ethiopia</p>
+              <p className="text-estate-sand/50">info@shebaestates.com • +251-096 621 3636</p>
+            </div>
           </div>
-        </div>
+        </>
       )}
     </>
   );

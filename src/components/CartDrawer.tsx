@@ -53,8 +53,8 @@ export const CartDrawer: React.FC = () => {
         onClick={closeCart}
       />
 
-      <div className="fixed inset-y-0 right-0 max-w-full flex pl-10">
-        <div className="w-screen max-w-md bg-estate-sand text-estate-charcoal shadow-2xl flex flex-col justify-between border-l border-estate-gold/20 animate-slide-in">
+      <div className="fixed inset-y-0 right-0 w-full max-w-md flex">
+        <div className="w-full max-w-md bg-estate-sand text-estate-charcoal shadow-2xl flex flex-col justify-between border-l border-estate-gold/20 animate-slide-in">
           {/* Cart Header */}
           <div className="p-6 border-b border-estate-charcoal/10 flex items-center justify-between bg-estate-cream/50">
             <div className="flex items-center gap-3">
@@ -79,7 +79,7 @@ export const CartDrawer: React.FC = () => {
           </div>
 
           {/* Cart Items List */}
-          <div className="flex-1 overflow-y-auto p-6 space-y-5">
+          <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-5 overscroll-contain" style={{ WebkitOverflowScrolling: 'touch' }}>
             {items.length === 0 ? (
               <div className="h-full flex flex-col items-center justify-center text-center py-16 space-y-4">
                 <div className="w-16 h-16 rounded-full bg-estate-cream flex items-center justify-center text-estate-forest">
@@ -167,7 +167,10 @@ export const CartDrawer: React.FC = () => {
 
           {/* Cart Footer */}
           {items.length > 0 && (
-            <div className="p-6 border-t border-estate-charcoal/10 bg-estate-cream/60 space-y-4">
+            <div
+              className="p-4 sm:p-6 border-t border-estate-charcoal/10 bg-estate-cream/60 space-y-4"
+              style={{ paddingBottom: 'max(1rem, env(safe-area-inset-bottom))' }}
+            >
               <div className="space-y-1.5 text-sm">
                 <div className="flex justify-between text-estate-muted font-light">
                   <span>Subtotal</span>
